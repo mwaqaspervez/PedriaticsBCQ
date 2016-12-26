@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.TextView;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -17,12 +18,9 @@ public class MainActivity extends AppCompatActivity {
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
             getSupportActionBar().setHomeButtonEnabled(true);
         }
-    }
 
-    @Override
-    public void onBackPressed() {
-        super.onBackPressed();
-        overridePendingTransition(R.anim.left_to_right, R.anim.right_to_left);
+        if (ApplicationClass.getInstance().getCurrentUser() != null)
+            ((TextView) findViewById(R.id.register)).setText("Logout");
     }
 
     @Override
@@ -61,13 +59,28 @@ public class MainActivity extends AppCompatActivity {
 
 
             case R.id.register:
-                startActivity(new Intent(this, LoginActivity.class));
-                overridePendingTransition(R.anim.slide_in_right, R.anim.slide_in_left);
+
+                if (ApplicationClass.getInstance().getCurrentUser() != null) {
+                    ApplicationClass.getInstance().getAuth().signOut();
+                    finish();
+                    startActivity(getIntent());
+                } else {
+                    startActivity(new Intent(this, LoginActivity.class));
+                    overridePendingTransition(R.anim.slide_in_right, R.anim.slide_in_left);
+                }
                 break;
 
 
             case R.id.books:
                 break;
         }
+    }
+
+    @Override
+    protected void onResume() {
+
+        super.onResume();
+        if (ApplicationClass.getInstance().getCurrentUser() != null)
+            ((TextView) findViewById(R.id.register)).setText("Logout");
     }
 }

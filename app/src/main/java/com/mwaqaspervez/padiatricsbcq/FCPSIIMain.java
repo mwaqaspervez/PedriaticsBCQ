@@ -1,5 +1,6 @@
 package com.mwaqaspervez.padiatricsbcq;
 
+
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -7,14 +8,14 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.MenuItem;
 import android.view.View;
 
-public class MBBSMain extends AppCompatActivity {
+public class FCPSIIMain extends AppCompatActivity {
+
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.layout_mbbs);
-
-        if (getSupportActionBar() != null) {
+        setContentView(R.layout.layout_fcps_ii);
+        if(getSupportActionBar() !=null){
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
             getSupportActionBar().setHomeButtonEnabled(true);
         }
@@ -38,41 +39,61 @@ public class MBBSMain extends AppCompatActivity {
 
         switch (view.getId()) {
 
-            case R.id.mbb_imnci:
+            case R.id.fcps_ii_imnci:
+                startActivity(new Intent(this, BCQMain.class));
+                overridePendingTransition(R.anim.slide_in_right, R.anim.slide_in_left);
+                break;
+            case R.id.fcps_ii_growth:
+                startActivity(new Intent(this, BCQMain.class));
+                overridePendingTransition(R.anim.slide_in_right, R.anim.slide_in_left);
+                break;
+            case R.id.fcps_ii_infections:
                 startActivity(new Intent(this, BCQMain.class));
                 overridePendingTransition(R.anim.slide_in_right, R.anim.slide_in_left);
                 break;
 
-            case R.id.mbb_growth:
+            case R.id.fcps_ii_hematology:
                 startActivity(new Intent(this, BCQMain.class));
                 overridePendingTransition(R.anim.slide_in_right, R.anim.slide_in_left);
                 break;
-            case R.id.mbb_neonatology:
+            case R.id.fcps_ii_gastroenterology:
                 startActivity(new Intent(this, BCQMain.class));
                 overridePendingTransition(R.anim.slide_in_right, R.anim.slide_in_left);
                 break;
-            case R.id.mbb_hematology:
+            case R.id.fcps_ii_pulmonology:
                 startActivity(new Intent(this, BCQMain.class));
                 overridePendingTransition(R.anim.slide_in_right, R.anim.slide_in_left);
                 break;
-            case R.id.mbb_cardiology:
+            case R.id.fcps_ii_nephrology:
+                startActivity(new Intent(this, BCQMain.class));
+                overridePendingTransition(R.anim.slide_in_right, R.anim.slide_in_left);
+                break;
+            case R.id.fcps_ii_cardiology:
+                startActivity(new Intent(this, BCQMain.class));
+                overridePendingTransition(R.anim.slide_in_right, R.anim.slide_in_left);
+                break;
+            case R.id.fcps_ii_dermatology:
                 startActivity(new Intent(this, BCQMain.class));
                 overridePendingTransition(R.anim.slide_in_right, R.anim.slide_in_left);
                 break;
 
-            case R.id.mbb_pulmonology:
+            case R.id.fcps_ii_rheumatology:
                 startActivity(new Intent(this, BCQMain.class));
                 overridePendingTransition(R.anim.slide_in_right, R.anim.slide_in_left);
                 break;
-            case R.id.mbb_nephrology:
+            case R.id.fcps_ii_neurology:
                 startActivity(new Intent(this, BCQMain.class));
                 overridePendingTransition(R.anim.slide_in_right, R.anim.slide_in_left);
                 break;
-            case R.id.mbb_endocrinology:
+            case R.id.fcps_ii_neonatology:
                 startActivity(new Intent(this, BCQMain.class));
                 overridePendingTransition(R.anim.slide_in_right, R.anim.slide_in_left);
                 break;
-            case R.id.mbb_dermatology:
+            case R.id.fcps_ii_orthopedics:
+                startActivity(new Intent(this, BCQMain.class));
+                overridePendingTransition(R.anim.slide_in_right, R.anim.slide_in_left);
+                break;
+            case R.id.fcps_ii_endocrinology:
                 startActivity(new Intent(this, BCQMain.class));
                 overridePendingTransition(R.anim.slide_in_right, R.anim.slide_in_left);
                 break;
