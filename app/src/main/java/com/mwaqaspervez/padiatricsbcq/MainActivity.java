@@ -20,7 +20,7 @@ public class MainActivity extends AppCompatActivity {
         }
 
         if (ApplicationClass.getInstance().getCurrentUser() != null)
-            ((TextView) findViewById(R.id.register)).setText("Logout");
+            ((TextView) findViewById(R.id.register)).setText("" + "Logout" + "");
     }
 
     @Override
@@ -81,6 +81,6 @@ public class MainActivity extends AppCompatActivity {
 
         super.onResume();
         if (ApplicationClass.getInstance().getCurrentUser() != null)
-            ((TextView) findViewById(R.id.register)).setText("Logout");
+            ((TextView) findViewById(R.id.register)).setText("" + "Logout" + "");
     }
 }

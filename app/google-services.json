@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "573964038660",
+    "firebase_url": "https://pediatricbcq.firebaseio.com",
+    "project_id": "pediatricbcq",
+    "storage_bucket": "pediatricbcq.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:573964038660:android:29953910fe8c517e",
+        "android_client_info": {
+          "package_name": "com.mwaqaspervez.padiatricsbcq"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "573964038660-l9ban9d41mrpi1imjgivj0bjb57lk4r6.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.mwaqaspervez.padiatricsbcq",
+            "certificate_hash": "0D32B7CE9C65413478EA03981FCC7998BD3C88A0"
+          }
+        },
+        {
+          "client_id": "573964038660-2dl7j2jc3h8et5a0qr0r1njt5jvtecsr.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBRiibb6SMCGao5hHdt26WtInWo9vRx_VI"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "573964038660-2dl7j2jc3h8et5a0qr0r1njt5jvtecsr.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
