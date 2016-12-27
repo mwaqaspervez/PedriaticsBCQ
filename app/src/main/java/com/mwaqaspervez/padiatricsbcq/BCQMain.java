@@ -3,6 +3,7 @@ package com.mwaqaspervez.padiatricsbcq;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.view.MenuItem;
 import android.view.View;
@@ -16,6 +17,7 @@ public class BCQMain extends AppCompatActivity implements View.OnClickListener {
 
     private TextView question, questionNumber, ans1, ans2, ans3, ans4;
     private List<String> list;
+    private int currentPosition = 0;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -37,8 +39,8 @@ public class BCQMain extends AppCompatActivity implements View.OnClickListener {
         ans4.setOnClickListener(this);
 
 
-        question.setText(list.get(0));
-        questionNumber.setText("Question #1");
+        question.setText(list.get(currentPosition));
+        questionNumber.setText("Question #" + currentPosition + 1);
 
         if (getSupportActionBar() != null) {
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
@@ -165,8 +167,6 @@ public class BCQMain extends AppCompatActivity implements View.OnClickListener {
     public void onBackPressed() {
         super.onBackPressed();
         overridePendingTransition(R.anim.left_to_right, R.anim.right_to_left);
-
-
     }
 
     @Override
@@ -179,6 +179,21 @@ public class BCQMain extends AppCompatActivity implements View.OnClickListener {
 
     @Override
     public void onClick(View view) {
+        findViewById(showCorrectAnswer(list.get(currentPosition))).
+                setBackgroundColor(ContextCompat.getColor(this, R.color.LawnGreen));
+    }
 
+    private int showCorrectAnswer(String answer) {
+
+        if (ans1.getText().toString().trim().toLowerCase().equals(answer.trim().toLowerCase()))
+            return R.id.main_answer_i;
+        else if (ans2.getText().toString().trim().toLowerCase().equals(answer.trim().toLowerCase()))
+            return R.id.main_answer_ii;
+        else if (ans3.getText().toString().trim().toLowerCase().equals(answer.trim().toLowerCase()))
+            return R.id.main_answer_iii;
+        else if (ans4.getText().toString().trim().toLowerCase().equals(answer.trim().toLowerCase()))
+            return R.id.main_answer_iv;
+
+        return R.id.main_answer_i;
     }
 }
