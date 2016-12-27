@@ -16,7 +16,7 @@ public class FCPSIMain extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.layout_fcps_i);
 
-        if(getSupportActionBar() !=null){
+        if (getSupportActionBar() != null) {
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
             getSupportActionBar().setHomeButtonEnabled(true);
         }
@@ -38,26 +38,24 @@ public class FCPSIMain extends AppCompatActivity {
     }
 
     public void onClick(View view) {
-
+        Intent intent = new Intent(this, BCQMain.class);
         switch (view.getId()) {
 
             case R.id.fcps_i_anatomy:
-                startActivity(new Intent(this, BCQMain.class));
-                overridePendingTransition(R.anim.slide_in_right, R.anim.slide_in_left);
+                intent.putExtra("subject", "fcps_i_anatomy");
                 break;
 
 
             case R.id.fcps_i_physiology:
-                startActivity(new Intent(this, BCQMain.class));
-                overridePendingTransition(R.anim.slide_in_right, R.anim.slide_in_left);
+                intent.putExtra("subject", "fcps_i_physiology");
                 break;
 
-            case R.id.fcps_ii_pathology:
-                startActivity(new Intent(this, BCQMain.class));
-                overridePendingTransition(R.anim.slide_in_right, R.anim.slide_in_left);
+            case R.id.fcps_i_pathology:
+                intent.putExtra("subject", "fcps_i_pathology");
                 break;
-
-
         }
+
+        startActivity(intent);
+        overridePendingTransition(R.anim.slide_in_right, R.anim.slide_in_left);
     }
 }

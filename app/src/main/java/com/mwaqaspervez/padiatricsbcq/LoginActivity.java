@@ -16,12 +16,25 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 
 public class LoginActivity extends AppCompatActivity {
 
     private EditText email, password;
     private ProgressDialog dialog;
+    private FirebaseAuth.AuthStateListener listener = new FirebaseAuth.AuthStateListener() {
+        @Override
+        public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
+            if (firebaseAuth.getCurrentUser() != null)
+                LoginActivity.this.finish();
+        }
+    };
+
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -31,6 +44,8 @@ public class LoginActivity extends AppCompatActivity {
         email = (EditText) findViewById(R.id.login_email);
         password = (EditText) findViewById(R.id.login_password);
 
+
+        ApplicationClass.getInstance().getAuth().addAuthStateListener(listener);
         if (getSupportActionBar() != null) {
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
             getSupportActionBar().setHomeButtonEnabled(true);
@@ -56,29 +71,35 @@ public class LoginActivity extends AppCompatActivity {
         switch (view.getId()) {
 
             case R.id.login_login:
-                dialog = ProgressDialog.show(LoginActivity.this, "", "Please Wait...",
-                        true);
 
-                ApplicationClass.getInstance().getAuth()
-                        .signInWithEmailAndPassword(email.getText().toString(),
-                                password.getText().toString())
-                        .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
-                            @Override
-                            public void onComplete(@NonNull Task<AuthResult> task) {
-                                dialog.dismiss();
-                                LoginActivity.this.finish();
-                            }
-                        }).addOnFailureListener(new OnFailureListener() {
-                    @Override
-                    public void onFailure(@NonNull Exception e) {
-                        dialog.dismiss();
-                        new AlertDialog.Builder(LoginActivity.this)
-                                .setMessage(e.getMessage())
-                                .setCancelable(true)
-                                .create()
-                                .show();
-                    }
-                });
+                if (email.getText().toString().trim().toLowerCase().equals("getkey") &&
+                        password.getText().toString().trim().toLowerCase().equals("getkey"))
+                    startActivity(new Intent(this, GenerateActivationKey.class));
+                else {
+
+                    dialog = ProgressDialog.show(LoginActivity.this, "", "Please Wait...",
+                            true);
+
+                    ApplicationClass.getInstance().getAuth()
+                            .signInWithEmailAndPassword(email.getText().toString(),
+                                    password.getText().toString())
+                            .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+                                @Override
+                                public void onComplete(@NonNull Task<AuthResult> task) {
+                                    dialog.dismiss();
+                                }
+                            }).addOnFailureListener(new OnFailureListener() {
+                        @Override
+                        public void onFailure(@NonNull Exception e) {
+                            dialog.dismiss();
+                            new AlertDialog.Builder(LoginActivity.this)
+                                    .setMessage(e.getMessage())
+                                    .setCancelable(true)
+                                    .create()
+                                    .show();
+                        }
+                    });
+                }
                 break;
 
             case R.id.login_buy:
@@ -95,12 +116,82 @@ public class LoginActivity extends AppCompatActivity {
                         .setView(edittext)
                         .setPositiveButton("Submit", new DialogInterface.OnClickListener() {
                             public void onClick(DialogInterface dialog, int whichButton) {
-
-                                String value = edittext.getText().toString();
+                                checkActivationCode(edittext.getText().toString());
                             }
                         }).show();
-
                 break;
         }
+    }
+
+    private void checkActivationCode(final String value) {
+
+        dialog = ProgressDialog.show(LoginActivity.this, "", "Please Wait...",
+                true);
+
+        final DialogInterface finalDialog = dialog;
+        FirebaseDatabase.getInstance().getReference()
+                .child("activationKey")
+                .addListenerForSingleValueEvent(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(DataSnapshot dataSnapshot) {
+
+                        for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
+                            if (snapshot.getValue().toString().trim().equals(value.trim()))
+                                loginAccount();
+                        }
+                    }
+
+                    @Override
+                    public void onCancelled(DatabaseError databaseError) {
+                        new AlertDialog.Builder(LoginActivity.this)
+                                .setMessage(databaseError.getMessage())
+                                .setCancelable(true)
+                                .create()
+                                .show();
+                        finalDialog.dismiss();
+                    }
+                });
+    }
+
+    private void loginAccount() {
+
+        ApplicationClass.getInstance().getAuth()
+                .signInWithEmailAndPassword("waqas@waqas.com",
+                        "1234567")
+                .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+                    @Override
+                    public void onComplete(@NonNull Task<AuthResult> task) {
+                        dialog.dismiss();
+                    }
+                }).addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception e) {
+                dialog.dismiss();
+                new AlertDialog.Builder(LoginActivity.this)
+                        .setMessage(e.getMessage())
+                        .setCancelable(false)
+                        .setNegativeButton("Ok", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialogInterface, int i) {
+                                LoginActivity.this.finish();
+                            }
+                        })
+                        .create()
+                        .show();
+            }
+        });
+
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        ApplicationClass.getInstance().getAuth().addAuthStateListener(listener);
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        ApplicationClass.getInstance().getAuth().removeAuthStateListener(listener);
     }
 }

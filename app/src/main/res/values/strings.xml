@@ -2,5 +2,65 @@
     <string name="app_name">PediatricsBCQ</string>
     <string name="prof_name">Prof. Sultan Mustafa</string>
     <string name="prof_descrp"><![CDATA[Head Of Department Of Pediatrics & Neonatology\nKarachi Medical & Dental College and Abbasi Shaheed Hospital]]></string>
-    <string name="banner_ad_unit_id">aasdasd</string>
+    <string name="banner_ad_unit_id">ca-app-pub-3940256099942544/6300978111</string>
+
+
+    <string-array name="questions_fcps_i_anatomy">
+
+
+        <item>How are you doing in this semester with your last performance</item>
+    </string-array>
+    <string-array name="questions_fcps_i_physiology">
+    </string-array>
+    <string-array name="questions_fcps_i_pathology">
+    </string-array>
+    <string-array name="questions_fcps_ii_imnci">
+    </string-array>
+    <string-array name="questions_fcps_ii_growth">
+    </string-array>
+    <string-array name="questions_fcps_ii_infections">
+    </string-array>
+    <string-array name="questions_fcps_ii_hematology">
+    </string-array>
+    <string-array name="questions_fcps_ii_gastroenterology">
+    </string-array>
+    <string-array name="questions_fcps_ii_pulmonology">
+    </string-array>
+    <string-array name="questions_fcps_ii_nephrology">
+    </string-array>
+    <string-array name="questions_fcps_ii_cardiology">
+    </string-array>
+    <string-array name="questions_fcps_ii_dermatology">
+    </string-array>
+    <string-array name="questions_fcps_ii_rheumatology">
+    </string-array>
+    <string-array name="questions_fcps_ii_neurology">
+    </string-array>
+    <string-array name="questions_fcps_ii_neonatology">
+    </string-array>
+    <string-array name="questions_fcps_ii_orthopedics">
+    </string-array>
+    <string-array name="questions_fcps_ii_endocrinology">
+    </string-array>
+    <string-array name="questions_mbb_imnci">
+    </string-array>
+    <string-array name="questions_mbb_growth">
+    </string-array>
+    <string-array name="questions_mbb_neonatology">
+    </string-array>
+    <string-array name="questions_mbb_hematology">
+    </string-array>
+    <string-array name="questions_mbb_cardiology">
+    </string-array>
+    <string-array name="questions_mbb_pulmonology">
+    </string-array>
+    <string-array name="questions_mbb_nephrology">
+    </string-array>
+    <string-array name="questions_mbb_endocrinology">
+    </string-array>
+    <string-array name="questions_mbb_dermatology">
+    </string-array>
+    <string-array name="questions_free">
+    </string-array>
+
 </resources>

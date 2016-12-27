@@ -36,46 +36,41 @@ public class MBBSMain extends AppCompatActivity {
 
     public void onClick(View view) {
 
+        Intent intent = new Intent(this, BCQMain.class);
         switch (view.getId()) {
 
             case R.id.mbb_imnci:
-                startActivity(new Intent(this, BCQMain.class));
-                overridePendingTransition(R.anim.slide_in_right, R.anim.slide_in_left);
+                intent.putExtra("subject", "mbb_imnci");
                 break;
 
             case R.id.mbb_growth:
-                startActivity(new Intent(this, BCQMain.class));
-                overridePendingTransition(R.anim.slide_in_right, R.anim.slide_in_left);
+                intent.putExtra("subject", "mbb_growth");
                 break;
             case R.id.mbb_neonatology:
-                startActivity(new Intent(this, BCQMain.class));
-                overridePendingTransition(R.anim.slide_in_right, R.anim.slide_in_left);
+                intent.putExtra("subject", "mbb_neonatology");
                 break;
             case R.id.mbb_hematology:
-                startActivity(new Intent(this, BCQMain.class));
-                overridePendingTransition(R.anim.slide_in_right, R.anim.slide_in_left);
+                intent.putExtra("subject", "mbb_hematology");
                 break;
             case R.id.mbb_cardiology:
-                startActivity(new Intent(this, BCQMain.class));
-                overridePendingTransition(R.anim.slide_in_right, R.anim.slide_in_left);
+                intent.putExtra("subject", "mbb_cardiology");
                 break;
 
             case R.id.mbb_pulmonology:
-                startActivity(new Intent(this, BCQMain.class));
-                overridePendingTransition(R.anim.slide_in_right, R.anim.slide_in_left);
+                intent.putExtra("subject", "mbb_pulmonology");
                 break;
             case R.id.mbb_nephrology:
-                startActivity(new Intent(this, BCQMain.class));
-                overridePendingTransition(R.anim.slide_in_right, R.anim.slide_in_left);
+                intent.putExtra("subject", "mbb_nephrology");
                 break;
             case R.id.mbb_endocrinology:
-                startActivity(new Intent(this, BCQMain.class));
-                overridePendingTransition(R.anim.slide_in_right, R.anim.slide_in_left);
+                intent.putExtra("subject", "mbb_endocrinology");
                 break;
             case R.id.mbb_dermatology:
-                startActivity(new Intent(this, BCQMain.class));
-                overridePendingTransition(R.anim.slide_in_right, R.anim.slide_in_left);
+                intent.putExtra("subject", "mbb_dermatology");
                 break;
         }
+
+        startActivity(intent);
+        overridePendingTransition(R.anim.slide_in_right, R.anim.slide_in_left);
     }
 }

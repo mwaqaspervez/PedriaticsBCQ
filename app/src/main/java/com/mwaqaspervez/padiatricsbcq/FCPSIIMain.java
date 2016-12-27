@@ -15,7 +15,7 @@ public class FCPSIIMain extends AppCompatActivity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.layout_fcps_ii);
-        if(getSupportActionBar() !=null){
+        if (getSupportActionBar() != null) {
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
             getSupportActionBar().setHomeButtonEnabled(true);
         }
@@ -36,67 +36,55 @@ public class FCPSIIMain extends AppCompatActivity {
     }
 
     public void onClick(View view) {
-
+        Intent intent = new Intent(this, BCQMain.class);
         switch (view.getId()) {
 
             case R.id.fcps_ii_imnci:
-                startActivity(new Intent(this, BCQMain.class));
-                overridePendingTransition(R.anim.slide_in_right, R.anim.slide_in_left);
+                intent.putExtra("subject","fcps_ii_imnci");
                 break;
             case R.id.fcps_ii_growth:
-                startActivity(new Intent(this, BCQMain.class));
-                overridePendingTransition(R.anim.slide_in_right, R.anim.slide_in_left);
+                intent.putExtra("subject","fcps_ii_growth");
                 break;
             case R.id.fcps_ii_infections:
-                startActivity(new Intent(this, BCQMain.class));
-                overridePendingTransition(R.anim.slide_in_right, R.anim.slide_in_left);
+                intent.putExtra("subject","fcps_ii_infections");
                 break;
 
             case R.id.fcps_ii_hematology:
-                startActivity(new Intent(this, BCQMain.class));
-                overridePendingTransition(R.anim.slide_in_right, R.anim.slide_in_left);
+                intent.putExtra("subject","fcps_ii_hematology");
                 break;
             case R.id.fcps_ii_gastroenterology:
-                startActivity(new Intent(this, BCQMain.class));
-                overridePendingTransition(R.anim.slide_in_right, R.anim.slide_in_left);
+                intent.putExtra("subject","fcps_ii_gastroenterology");
                 break;
             case R.id.fcps_ii_pulmonology:
-                startActivity(new Intent(this, BCQMain.class));
-                overridePendingTransition(R.anim.slide_in_right, R.anim.slide_in_left);
+                intent.putExtra("subject","fcps_ii_pulmonology");
                 break;
             case R.id.fcps_ii_nephrology:
-                startActivity(new Intent(this, BCQMain.class));
-                overridePendingTransition(R.anim.slide_in_right, R.anim.slide_in_left);
+                intent.putExtra("subject","fcps_ii_nephrology");
                 break;
             case R.id.fcps_ii_cardiology:
-                startActivity(new Intent(this, BCQMain.class));
-                overridePendingTransition(R.anim.slide_in_right, R.anim.slide_in_left);
+                intent.putExtra("subject","fcps_ii_cardiology");
                 break;
             case R.id.fcps_ii_dermatology:
-                startActivity(new Intent(this, BCQMain.class));
-                overridePendingTransition(R.anim.slide_in_right, R.anim.slide_in_left);
+                intent.putExtra("subject","fcps_ii_dermatology");
                 break;
 
             case R.id.fcps_ii_rheumatology:
-                startActivity(new Intent(this, BCQMain.class));
-                overridePendingTransition(R.anim.slide_in_right, R.anim.slide_in_left);
+                intent.putExtra("subject","fcps_ii_rheumatology");
                 break;
             case R.id.fcps_ii_neurology:
-                startActivity(new Intent(this, BCQMain.class));
-                overridePendingTransition(R.anim.slide_in_right, R.anim.slide_in_left);
+                intent.putExtra("subject","fcps_ii_neurology");
                 break;
             case R.id.fcps_ii_neonatology:
-                startActivity(new Intent(this, BCQMain.class));
-                overridePendingTransition(R.anim.slide_in_right, R.anim.slide_in_left);
+                intent.putExtra("subject","fcps_ii_neonatology");
                 break;
             case R.id.fcps_ii_orthopedics:
-                startActivity(new Intent(this, BCQMain.class));
-                overridePendingTransition(R.anim.slide_in_right, R.anim.slide_in_left);
+                intent.putExtra("subject","fcps_ii_orthopedics");
                 break;
             case R.id.fcps_ii_endocrinology:
-                startActivity(new Intent(this, BCQMain.class));
-                overridePendingTransition(R.anim.slide_in_right, R.anim.slide_in_left);
+                intent.putExtra("subject","fcps_ii_endocrinology");
                 break;
         }
+        startActivity(intent);
+        overridePendingTransition(R.anim.slide_in_right, R.anim.slide_in_left);
     }
 }

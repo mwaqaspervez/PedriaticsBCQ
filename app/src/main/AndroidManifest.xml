@@ -42,6 +42,9 @@
         <activity
             android:name=".FreeTourActivity"
             android:label="Free Tour" />
+        <activity
+            android:name=".GenerateActivationKey"
+            android:label="Generate Key" />
 
     </application>
 

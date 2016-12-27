@@ -205,7 +205,7 @@
 
 
             <RelativeLayout
-                android:id="@+id/fcps_ii_pathology"
+                android:id="@+id/fcps_i_pathology"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:onClick="onClick">

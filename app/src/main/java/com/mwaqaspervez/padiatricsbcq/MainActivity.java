@@ -14,16 +14,21 @@ import com.google.android.gms.ads.MobileAds;
 
 public class MainActivity extends AppCompatActivity {
 
+    private AdView mAdView;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        MobileAds.initialize(getApplicationContext(), "ca-app-pub-3940256099942544~3347511713");
-        AdView mAdView = (AdView) findViewById(R.id.adView);
-        AdRequest adRequest = new AdRequest.Builder().build();
-        mAdView.loadAd(adRequest);
+        MobileAds.initialize(getApplicationContext(), getString(R.string.banner_ad_unit_id));
+        mAdView = (AdView) findViewById(R.id.adView);
+        AdRequest adRequest = new AdRequest.Builder()
+                .addTestDevice(AdRequest.DEVICE_ID_EMULATOR)
+                .addTestDevice("89E1E170CEA27B51C6FC49C23A1132C3")
+                .build();
 
+        mAdView.loadAd(adRequest);
 
         if (getSupportActionBar() != null) {
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
@@ -92,11 +97,38 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
+    /**
+     * Called when leaving the activity
+     */
     @Override
-    protected void onResume() {
+    public void onPause() {
+        if (mAdView != null)
+            mAdView.pause();
 
+        super.onPause();
+    }
+
+    /**
+     * Called when returning to the activity
+     */
+    @Override
+    public void onResume() {
         super.onResume();
+        if (mAdView != null)
+            mAdView.resume();
         if (ApplicationClass.getInstance().getCurrentUser() != null)
             ((TextView) findViewById(R.id.register)).setText("" + "Logout" + "");
     }
+
+    /**
+     * Called before the activity is destroyed
+     */
+    @Override
+    public void onDestroy() {
+        if (mAdView != null)
+            mAdView.destroy();
+
+        super.onDestroy();
+    }
 }
+
