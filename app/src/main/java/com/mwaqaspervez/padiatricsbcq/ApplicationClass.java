@@ -34,4 +34,6 @@ public class ApplicationClass extends Application {
     public FirebaseAuth getAuth() {
         return mAuth;
     }
+
+
 }

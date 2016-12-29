@@ -47,15 +47,12 @@ public class BCQMain extends AppCompatActivity implements View.OnClickListener, 
                 .build();
 
         mAdView.loadAd(adRequest);
-
+        init();
 
         if (getIntent().getStringExtra("free") != null)
             loadFreeQuestions();
         else
             loadAllQuestions();
-
-
-        init();
 
         showFirstQuestion();
 

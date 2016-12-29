@@ -11,6 +11,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdView;
@@ -88,28 +89,31 @@ public class LoginActivity extends AppCompatActivity {
                     startActivity(new Intent(this, GenerateActivationKey.class));
                 else {
 
-                    dialog = ProgressDialog.show(LoginActivity.this, "", "Please Wait...",
-                            true);
+                    if (checkEmailAndPassword()) {
 
-                    ApplicationClass.getInstance().getAuth()
-                            .signInWithEmailAndPassword(email.getText().toString(),
-                                    password.getText().toString())
-                            .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
-                                @Override
-                                public void onComplete(@NonNull Task<AuthResult> task) {
-                                    dialog.dismiss();
-                                }
-                            }).addOnFailureListener(new OnFailureListener() {
-                        @Override
-                        public void onFailure(@NonNull Exception e) {
-                            dialog.dismiss();
-                            new AlertDialog.Builder(LoginActivity.this)
-                                    .setMessage(e.getMessage())
-                                    .setCancelable(true)
-                                    .create()
-                                    .show();
-                        }
-                    });
+                        dialog = ProgressDialog.show(LoginActivity.this, "", "Please Wait...",
+                                true);
+
+                        ApplicationClass.getInstance().getAuth()
+                                .signInWithEmailAndPassword(email.getText().toString(),
+                                        password.getText().toString())
+                                .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+                                    @Override
+                                    public void onComplete(@NonNull Task<AuthResult> task) {
+                                        dialog.dismiss();
+                                    }
+                                }).addOnFailureListener(new OnFailureListener() {
+                            @Override
+                            public void onFailure(@NonNull Exception e) {
+                                dialog.dismiss();
+                                new AlertDialog.Builder(LoginActivity.this)
+                                        .setMessage(e.getMessage())
+                                        .setCancelable(true)
+                                        .create()
+                                        .show();
+                            }
+                        });
+                    }
                 }
                 break;
 
@@ -132,6 +136,16 @@ public class LoginActivity extends AppCompatActivity {
                         }).show();
                 break;
         }
+    }
+
+    private boolean checkEmailAndPassword() {
+        if (email.getText().toString().isEmpty()
+                || password.getText().toString().isEmpty()) {
+            Toast.makeText(this, "Please Enter Your Email And Password", Toast.LENGTH_LONG)
+                    .show();
+            return false;
+        }
+        return true;
     }
 
     private void checkActivationCode(final String value) {
