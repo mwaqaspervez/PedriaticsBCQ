@@ -2,6 +2,7 @@ package com.mwaqaspervez.padiatricsbcq;
 
 import android.app.Application;
 
+import com.google.android.gms.ads.MobileAds;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.FirebaseDatabase;
@@ -21,6 +22,7 @@ public class ApplicationClass extends Application {
         instance = this;
         mAuth = FirebaseAuth.getInstance();
         FirebaseDatabase.getInstance().setPersistenceEnabled(true);
+        MobileAds.initialize(getApplicationContext(), "ca-app-pub-3750819656943471~1811440948");
         super.onCreate();
 
     }

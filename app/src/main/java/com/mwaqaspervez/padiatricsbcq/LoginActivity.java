@@ -12,6 +12,8 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
 
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.AdView;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.Task;
@@ -27,6 +29,9 @@ public class LoginActivity extends AppCompatActivity {
 
     private EditText email, password;
     private ProgressDialog dialog;
+    private AdView mAdView;
+
+
     private FirebaseAuth.AuthStateListener listener = new FirebaseAuth.AuthStateListener() {
         @Override
         public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
@@ -40,6 +45,12 @@ public class LoginActivity extends AppCompatActivity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.layout_login);
+
+        mAdView = (AdView) findViewById(R.id.adView);
+        AdRequest adRequest = new AdRequest.Builder()
+                .build();
+
+        mAdView.loadAd(adRequest);
 
         email = (EditText) findViewById(R.id.login_email);
         password = (EditText) findViewById(R.id.login_password);
@@ -186,12 +197,27 @@ public class LoginActivity extends AppCompatActivity {
     @Override
     protected void onResume() {
         super.onResume();
+        if (mAdView != null)
+            mAdView.resume();
         ApplicationClass.getInstance().getAuth().addAuthStateListener(listener);
     }
 
     @Override
     protected void onPause() {
         super.onPause();
+        if (mAdView != null)
+            mAdView.pause();
         ApplicationClass.getInstance().getAuth().removeAuthStateListener(listener);
+    }
+
+    /**
+     * Called before the activity is destroyed
+     */
+    @Override
+    public void onDestroy() {
+        if (mAdView != null)
+            mAdView.destroy();
+
+        super.onDestroy();
     }
 }

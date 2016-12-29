@@ -10,7 +10,6 @@ import android.widget.TextView;
 
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdView;
-import com.google.android.gms.ads.MobileAds;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -21,11 +20,8 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        MobileAds.initialize(getApplicationContext(), getString(R.string.banner_ad_unit_id));
         mAdView = (AdView) findViewById(R.id.adView);
         AdRequest adRequest = new AdRequest.Builder()
-                .addTestDevice(AdRequest.DEVICE_ID_EMULATOR)
-                .addTestDevice("89E1E170CEA27B51C6FC49C23A1132C3")
                 .build();
 
         mAdView.loadAd(adRequest);
@@ -68,7 +64,9 @@ public class MainActivity extends AppCompatActivity {
                 break;
 
             case R.id.free_tour:
-                startActivity(new Intent(this, FreeTourActivity.class));
+                Intent free = new Intent(this, BCQMain.class);
+                free.putExtra("free", "free");
+                startActivity(free);
                 overridePendingTransition(R.anim.slide_in_right, R.anim.slide_in_left);
                 break;
 

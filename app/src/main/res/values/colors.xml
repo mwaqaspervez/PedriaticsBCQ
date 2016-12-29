@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">@color/Chocolate</color>
-    <color name="colorPrimaryDark">@color/DarkChocolate</color>
-    <color name="colorAccent">@color/Chocolate</color>
+    <color name="colorPrimary">@color/MediumSeaGreen</color>
+    <color name="colorPrimaryDark">@color/SeaGreen</color>
+    <color name="colorAccent">@color/ForestGreen</color>
     <color name="White">#FFFFFF</color>
     <color name="Ivory">#FFFFF0</color>
     <color name="LightYellow">#FFFFE0</color>

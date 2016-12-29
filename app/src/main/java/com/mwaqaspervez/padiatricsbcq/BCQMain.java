@@ -17,6 +17,9 @@ import android.widget.TextSwitcher;
 import android.widget.TextView;
 import android.widget.ViewSwitcher;
 
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.AdView;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -31,22 +34,52 @@ public class BCQMain extends AppCompatActivity implements View.OnClickListener, 
     private List<String> optionD;
     private List<String> correctAnswerList;
     private int currentPosition = 0;
-    private TextView next, previous;
-
+    private AdView mAdView;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.layout_bcq_main);
 
+
+        mAdView = (AdView) findViewById(R.id.adView);
+        AdRequest adRequest = new AdRequest.Builder()
+                .build();
+
+        mAdView.loadAd(adRequest);
+
+
+        if (getIntent().getStringExtra("free") != null)
+            loadFreeQuestions();
+        else
+            loadAllQuestions();
+
+
         init();
-        loadAllQuestions();
+
         showFirstQuestion();
 
         if (getSupportActionBar() != null) {
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
             getSupportActionBar().setHomeButtonEnabled(true);
         }
+    }
+
+    private void loadFreeQuestions() {
+        questionsList.add("What is the name of your pet ?");
+        questionsList.add("What is the name of your father ?");
+
+        optionA.add("Dog");
+        optionB.add("Cat");
+        optionC.add("Elephant");
+        optionD.add("Crocodile");
+        correctAnswerList.add("Cat");
+
+        optionA.add("Aslam");
+        optionB.add("Ali");
+        optionC.add("Hussain");
+        optionD.add("Mehmood");
+        correctAnswerList.add("Mehmood");
     }
 
     private void loadAllQuestions() {
@@ -93,15 +126,14 @@ public class BCQMain extends AppCompatActivity implements View.OnClickListener, 
         ans3 = (TextSwitcher) findViewById(R.id.main_answer_iii);
         ans4 = (TextSwitcher) findViewById(R.id.main_answer_iv);
 
-        next = (TextView) findViewById(R.id.bcq_next);
-        previous = (TextView) findViewById(R.id.bcq_previous);
+        findViewById(R.id.bcq_next).setOnClickListener(this);
+        findViewById(R.id.bcq_previous).setOnClickListener(this);
 
         ans1.setOnClickListener(this);
         ans2.setOnClickListener(this);
         ans3.setOnClickListener(this);
         ans4.setOnClickListener(this);
-        next.setOnClickListener(this);
-        previous.setOnClickListener(this);
+
 
         question.setFactory(this);
         questionNumber.setFactory(new ViewSwitcher.ViewFactory() {
@@ -326,7 +358,6 @@ public class BCQMain extends AppCompatActivity implements View.OnClickListener, 
         ans4.setBackgroundColor(Color.WHITE);
     }
 
-
     private int showCorrectAnswer() {
         if (optionA.get(currentPosition).trim().toLowerCase().equals(correctAnswerList.get(currentPosition).trim().toLowerCase()))
             return R.id.main_answer_i;
@@ -347,4 +378,41 @@ public class BCQMain extends AppCompatActivity implements View.OnClickListener, 
         myText.setTextColor(Color.BLACK);
         return myText;
     }
+
+
+    /**
+     * Called when leaving the activity
+     */
+    @Override
+    public void onPause() {
+        if (mAdView != null)
+            mAdView.pause();
+
+        super.onPause();
+    }
+
+    /**
+     * Called when returning to the activity
+     */
+    @Override
+    public void onResume() {
+        super.onResume();
+        if (mAdView != null)
+            mAdView.resume();
+        if (ApplicationClass.getInstance().getCurrentUser() != null)
+            ((TextView) findViewById(R.id.register)).setText("" + "Logout" + "");
+    }
+
+    /**
+     * Called before the activity is destroyed
+     */
+    @Override
+    public void onDestroy() {
+        if (mAdView != null)
+            mAdView.destroy();
+
+        super.onDestroy();
+    }
+
+
 }
